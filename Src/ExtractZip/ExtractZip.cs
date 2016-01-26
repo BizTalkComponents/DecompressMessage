@@ -22,7 +22,13 @@ namespace BizTalkComponents.PipelineComponents.ExtractZip
                             IComponentUI
                             
     {
+        private readonly DecompressionManager _decompressionManager;
         private System.Collections.Queue _qOutMessages = new System.Collections.Queue();
+
+        public ExtractZip()
+        {
+            _decompressionManager = new DecompressionManager(new ZipDecompressor.ZipDecompressor());
+        }
 
         public void Disassemble(IPipelineContext pContext, IBaseMessage pInMsg)
         {
@@ -30,45 +36,24 @@ namespace BizTalkComponents.PipelineComponents.ExtractZip
 
             if (bodyPart != null)
             {
-                Stream originalStream = bodyPart.GetOriginalDataStream();
-                MemoryStream memStream = new MemoryStream();
-                byte[] buffer = new Byte[1024];
-                int bytesRead = 1024;
 
-                while (bytesRead != 0)
+                Stream inboundStream = bodyPart.GetOriginalDataStream();
+                VirtualStream virtualStream = new VirtualStream(VirtualStream.MemoryFlag.AutoOverFlowToDisk);
+                ReadOnlySeekableStream readOnlySeekableStream = new ReadOnlySeekableStream(inboundStream, virtualStream);
+
+                readOnlySeekableStream.Position = 0;
+                readOnlySeekableStream.Seek(0, SeekOrigin.Begin);
+                var messages = _decompressionManager.DecompressMessage(readOnlySeekableStream);
+                IBaseMessage outMessage;
+
+                foreach (var msg in messages)
                 {
-                    bytesRead = originalStream.Read(buffer, 0, buffer.Length);
-                    memStream.Write(buffer, 0, bytesRead);
-                }
-
-                memStream.Position = 0;
-
-                if (originalStream != null)
-                {
-                    using (ZipArchive zipArchive = new ZipArchive(memStream, ZipArchiveMode.Read))
-                    {
-                        foreach (ZipArchiveEntry entry in zipArchive.Entries)
-                        {
-                            MemoryStream entryStream = new MemoryStream();
-                            byte[] entrybuffer = new Byte[1024];
-                            int entryBytesRead = 1024;
-                            Stream zipArchiveEntryStream = entry.Open();
-                            while (entryBytesRead != 0)
-                            {
-                                entryBytesRead = zipArchiveEntryStream.Read(entrybuffer, 0, entrybuffer.Length);
-                                entryStream.Write(entrybuffer, 0, entryBytesRead);
-                            }
-
-                            IBaseMessage outMessage;
-                            outMessage = pContext.GetMessageFactory().CreateMessage();
-                            outMessage.AddPart("Body", pContext.GetMessageFactory().CreateMessagePart(), true);
-                            entryStream.Position = 0;
-                            outMessage.BodyPart.Data = entryStream;
-                            ContextExtensions.Promote(pInMsg.Context, new ContextProperty(FileProperties.ReceivedFileName), entry.Name);
-                            outMessage.Context = PipelineUtil.CloneMessageContext(pInMsg.Context);
-                            _qOutMessages.Enqueue(outMessage);
-                        }
-                    }
+                    outMessage = pContext.GetMessageFactory().CreateMessage();
+                    outMessage.AddPart("Body", pContext.GetMessageFactory().CreateMessagePart(), true);
+                    outMessage.BodyPart.Data = msg.Value;
+                    ContextExtensions.Promote(pInMsg.Context, new ContextProperty(FileProperties.ReceivedFileName), msg.Key);
+                    outMessage.Context = PipelineUtil.CloneMessageContext(pInMsg.Context);
+                    _qOutMessages.Enqueue(outMessage);
                 }
             }
         }

@@ -58,9 +58,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Winterdom.BizTalk.PipelineTesting">
-      <HintPath>packages\Winterdom.BizTalk.PipelineTesting.1.2.2.0\lib\net45\Winterdom.BizTalk.PipelineTesting.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BiztalkComponents.Utils\ContextExtensions.cs" />
@@ -71,12 +68,16 @@
     <Compile Include="BiztalkComponents.Utils\ValidationHelper.cs" />
     <Compile Include="ExtractZip.Component.cs" />
     <Compile Include="ExtractZip.cs" />
+    <Compile Include="IMessageDecompressor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DecompressionManager.cs" />
+    <Compile Include="ZipDecompressor\ZipDecompressor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BizTalkComponents.PipelineComponents.ExtractZip.snk" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
