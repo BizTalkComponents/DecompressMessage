@@ -1,22 +1,19 @@
 ﻿using System;
-using System.Globalization;
-using BizTalkComponents.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Winterdom.BizTalk.PipelineTesting;
-using System.IO.Compression;
 using System.IO;
 
-namespace BizTalkComponents.PipelineComponents.ExtractZip.Tests.UnitTests
+namespace BizTalkComponents.PipelineComponents.DecompressMessage.Tests.UnitTests
 {
     [TestClass]
-    public class ExtractZipTests
+    public class ZipDisassemblerTests
     {
         [TestMethod]
         public void TestExtractNoOfFiles()
         {
             int expectedNoOfFilesInZip = 3;
             var pipeline = PipelineFactory.CreateEmptyReceivePipeline();
-            var component = new ExtractZip();
+            var component = new ZipDisassembler();
             string zipPath = @"TestData\test.zip";
             pipeline.AddComponent(component, PipelineStage.Disassemble);
 

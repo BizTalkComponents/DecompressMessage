@@ -1,16 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizTalkComponents.PipelineComponents.ExtractZip", "Src\ExtractZip\BizTalkComponents.PipelineComponents.ExtractZip.csproj", "{7E97DD02-E9A9-4CE4-9175-1F83E9DFE8CD}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{A8862195-C734-4BE7-9AC6-107E14A2D078}"
 	ProjectSection(SolutionItems) = preProject
 		Build\Build.proj = Build\Build.proj
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizTalkComponents.PipelineComponents.ExtractZip.Tests.UnitTests", "Tests\UnitTests\BizTalkComponents.PipelineComponents.ExtractZip.Tests.UnitTests.csproj", "{628742DA-4AC4-4483-8562-23B080CCBDBE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizTalkComponents.PipelineComponents.DecompressMessage", "Src\DecompressMessage\BizTalkComponents.PipelineComponents.DecompressMessage.csproj", "{7E97DD02-E9A9-4CE4-9175-1F83E9DFE8CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizTalkComponents.PipelineComponents.DecompressMessage.Tests.UnitTests", "Tests\UnitTests\BizTalkComponents.PipelineComponents.DecompressMessage.Tests.UnitTests.csproj", "{628742DA-4AC4-4483-8562-23B080CCBDBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

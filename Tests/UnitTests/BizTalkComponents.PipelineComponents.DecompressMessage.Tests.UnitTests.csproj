@@ -6,8 +6,8 @@
     <ProjectGuid>{628742DA-4AC4-4483-8562-23B080CCBDBE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BizTalkComponents.PipelineComponents.ExtractZip.Tests.UnitTests</RootNamespace>
-    <AssemblyName>BizTalkComponents.PipelineComponents.ExtractZip.Tests.UnitTests</AssemblyName>
+    <RootNamespace>BizTalkComponents.PipelineComponents.DecompressMessage.Tests.UnitTests</RootNamespace>
+    <AssemblyName>BizTalkComponents.PipelineComponents.DecompressMessage.Tests.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -60,20 +60,20 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ExtractZipTests.cs" />
+    <Compile Include="ZipDisassemblerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Src\ExtractZip\BizTalkComponents.PipelineComponents.ExtractZip.csproj">
-      <Project>{7e97dd02-e9a9-4ce4-9175-1f83e9dfe8cd}</Project>
-      <Name>BizTalkComponents.PipelineComponents.ExtractZip</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="TestData\test.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Src\DecompressMessage\BizTalkComponents.PipelineComponents.DecompressMessage.csproj">
+      <Project>{7e97dd02-e9a9-4ce4-9175-1f83e9dfe8cd}</Project>
+      <Name>BizTalkComponents.PipelineComponents.DecompressMessage</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

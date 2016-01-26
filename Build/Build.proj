@@ -3,20 +3,20 @@
 	<Import Project="$(MSBuildExtensionsPath)\ExtensionPack\4.0\MSBuild.ExtensionPack.tasks"/>
 	<PropertyGroup>
 		<DestinationPath>.</DestinationPath>
-		<ApplicationName>BizTalkComponents.PipelineComponents.ExtractZip</ApplicationName>
+		<ApplicationName>BizTalkComponents.PipelineComponents.DecompressMessage</ApplicationName>
 	</PropertyGroup>
 	<ItemGroup>
-		<Resource Include="..\Src\ExtractZip\bin\Debug\BizTalkComponents.PipelineComponents.ExtractZip.dll" />
+		<Resource Include="..\Src\DecompressMessage\bin\Debug\BizTalkComponents.PipelineComponents.DecompressMessage.dll" />
 	</ItemGroup>
 	<Target Name="GetVersion">
-		<MSBuild.ExtensionPack.Framework.Assembly TaskAction="GetInfo" NetAssembly="..\Src\ExtractZip\bin\Debug\BizTalkComponents.PipelineComponents.ExtractZip.dll">
+		<MSBuild.ExtensionPack.Framework.Assembly TaskAction="GetInfo" NetAssembly="..\Src\DecompressMessage\bin\Debug\BizTalkComponents.PipelineComponents.DecompressMessage.dll">
 				<Output TaskParameter="OutputItems" ItemName="Info"/>
 			 </MSBuild.ExtensionPack.Framework.Assembly>
 	</Target>
 
 	<Target Name="GenerateMsi" DependsOnTargets="GetVersion">
 		<MsiTask  
-			FileName="BizTalkComponents.PipelineComponents.ExtractZip%(Info.AssemblyInformationalVersion).msi"
+			FileName="BizTalkComponents.PipelineComponents.DecompressMessagep%(Info.AssemblyInformationalVersion).msi"
 			DestinationPath="$(DestinationPath)"
 			ApplicationName="$(ApplicationName)"
 			SourceLocation="C:\%(Info.AssemblyInformationalVersion)"

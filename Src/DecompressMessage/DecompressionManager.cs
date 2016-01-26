@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BizTalkComponents.PipelineComponents.ExtractZip
+namespace BizTalkComponents.PipelineComponents.DecompressMessage
 {
     public class DecompressionManager
     {

@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.BizTalk.Message.Interop;
+﻿using Microsoft.BizTalk.Message.Interop;
 using Microsoft.BizTalk.Component.Interop;
-using System.ComponentModel;
 using System.IO;
-using System.IO.Compression;
 using Microsoft.BizTalk.Streaming;
 using BizTalkComponents.Utils;
-using IComponent = Microsoft.BizTalk.Component.Interop.IComponent;
 
-namespace BizTalkComponents.PipelineComponents.ExtractZip
+namespace BizTalkComponents.PipelineComponents.DecompressMessage
 {
     [System.Runtime.InteropServices.Guid("A5CDE812-B7F8-4AFB-B36F-61E3AB0EE563")]
     [ComponentCategory(CategoryTypes.CATID_PipelineComponent)]
     [ComponentCategory(CategoryTypes.CATID_DisassemblingParser)]
-    public partial class ExtractZip : IBaseComponent,
+    public partial class ZipDisassembler : IBaseComponent,
                             IDisassemblerComponent,
                             IComponentUI
                             
@@ -25,7 +17,7 @@ namespace BizTalkComponents.PipelineComponents.ExtractZip
         private readonly DecompressionManager _decompressionManager;
         private System.Collections.Queue _qOutMessages = new System.Collections.Queue();
 
-        public ExtractZip()
+        public ZipDisassembler()
         {
             _decompressionManager = new DecompressionManager(new ZipDecompressor.ZipDecompressor());
         }
