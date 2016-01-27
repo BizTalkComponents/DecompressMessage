@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>BizTalkComponents.PipelineComponents.DecompressMessage</id>
+    <version>$version$</version>
+    <authors>Johan Kärnell</authors>
+    <description>Decompresses a BizTalk message</description>
+    <projectUrl>https://github.com/BizTalkComponents/DecompressMessage</projectUrl>
+    <tags>BizTalk</tags>
+  </metadata>
+</package>

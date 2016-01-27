@@ -74,6 +74,7 @@
     <Compile Include="ZipDecompressor\ZipDecompressor.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="BizTalkComponents.PipelineComponents.DecompressMessage.nuspec" />
     <None Include="BizTalkComponents.PipelineComponents.DecompressMessage.snk" />
     <None Include="packages.config" />
   </ItemGroup>
