@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BizTalkComponents.PipelineComponents.ExtractZip
+namespace BizTalkComponents.PipelineComponents.DecompressMessage
 {
-    public partial class ExtractZip
+    public partial class ZipDisassembler
     {
-        public string Name { get { return "ExtractZip"; } }
+        public string Name { get { return "ZipDisassembler"; } }
         public string Version { get { return "1.0"; } }
-        public string Description { get { return "This component is used to extract the content files of a zip file"; } }
+        public string Description { get { return "This component is used to disassemble zip messages"; } }
       
         public void InitNew() { }
 
