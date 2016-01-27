@@ -3,6 +3,7 @@ using Microsoft.BizTalk.Component.Interop;
 using Microsoft.BizTalk.Message.Interop;
 using Microsoft.BizTalk.Streaming;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,13 +26,13 @@ namespace BizTalkComponents.PipelineComponents.DecompressMessage
             _decompressor = decompressor;
         }
 
-        public ICollection<IBaseMessage> DecompressAndSpliMessage(IBaseMessage inMsg, IPipelineContext pctx)
+        public Queue DecompressAndSpliMessage(IBaseMessage inMsg, IPipelineContext pctx)
         {
             var readOnlySeekableStream = GetSeekableStream(inMsg);
 
             var messages = _decompressor.DecompressMessage(readOnlySeekableStream);
 
-            var outMsgs = new List<IBaseMessage>();
+            var outMsgs = new Queue();
             IBaseMessage outMessage;
             foreach (var msg in messages)
             {
@@ -41,7 +42,7 @@ namespace BizTalkComponents.PipelineComponents.DecompressMessage
                 outMessage.Context = PipelineUtil.CloneMessageContext(inMsg.Context);
                 ContextExtensions.Promote(outMessage.Context, new ContextProperty(FileProperties.ReceivedFileName), msg.Key);
 
-                outMsgs.Add(outMessage);
+                outMsgs.Enqueue(outMessage);
             }
             return outMsgs;
         }

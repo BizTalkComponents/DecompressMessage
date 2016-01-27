@@ -28,13 +28,7 @@ namespace BizTalkComponents.PipelineComponents.DecompressMessage
 
             if (bodyPart != null)
             {
-                var messages = _decompressionManager.DecompressAndSpliMessage(pInMsg, pContext);
-
-                foreach(var msg in messages)
-                {
-                    _qOutMessages.Enqueue(msg);
-
-                }
+                _qOutMessages = _decompressionManager.DecompressAndSpliMessage(pInMsg, pContext);
             }
         }
 
