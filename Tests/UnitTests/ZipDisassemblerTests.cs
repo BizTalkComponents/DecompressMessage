@@ -22,10 +22,9 @@ namespace BizTalkComponents.PipelineComponents.DecompressMessage.Tests.UnitTests
                 using (StreamReader sr = new StreamReader(fs))
                 {
                     var message = MessageHelper.CreateFromStream(sr.BaseStream);
-                    var outout = pipeline.Execute(message);
-                    Console.WriteLine(outout.Count.ToString());
+                    var output = pipeline.Execute(message);
 
-                    Assert.IsTrue(outout.Count == expectedNoOfFilesInZip);
+                    Assert.AreEqual(expectedNoOfFilesInZip, output.Count);
                 }
             }
         }
