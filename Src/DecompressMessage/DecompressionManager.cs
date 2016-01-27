@@ -1,4 +1,7 @@
-﻿using Microsoft.BizTalk.Message.Interop;
+﻿using BizTalkComponents.Utils;
+using Microsoft.BizTalk.Component.Interop;
+using Microsoft.BizTalk.Message.Interop;
+using Microsoft.BizTalk.Streaming;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,9 +25,37 @@ namespace BizTalkComponents.PipelineComponents.DecompressMessage
             _decompressor = decompressor;
         }
 
-        public ICollection<KeyValuePair<string,Stream>> DecompressMessage(Stream msg)
+        public ICollection<IBaseMessage> DecompressAndSpliMessage(IBaseMessage inMsg, IPipelineContext pctx)
         {
-            return _decompressor.DecompressMessage(msg);
+            var readOnlySeekableStream = GetSeekableStream(inMsg);
+
+            var messages = _decompressor.DecompressMessage(readOnlySeekableStream);
+
+            var outMsgs = new List<IBaseMessage>();
+            IBaseMessage outMessage;
+            foreach (var msg in messages)
+            {
+                outMessage = pctx.GetMessageFactory().CreateMessage();
+                outMessage.AddPart("Body", pctx.GetMessageFactory().CreateMessagePart(), true);
+                outMessage.BodyPart.Data = msg.Value;
+                outMessage.Context = PipelineUtil.CloneMessageContext(inMsg.Context);
+                ContextExtensions.Promote(outMessage.Context, new ContextProperty(FileProperties.ReceivedFileName), msg.Key);
+
+                outMsgs.Add(outMessage);
+            }
+            return outMsgs;
+        }
+
+        private ReadOnlySeekableStream GetSeekableStream(IBaseMessage msg)
+        {
+            Stream inboundStream = msg.BodyPart.GetOriginalDataStream();
+            VirtualStream virtualStream = new VirtualStream(VirtualStream.MemoryFlag.AutoOverFlowToDisk);
+            ReadOnlySeekableStream readOnlySeekableStream = new ReadOnlySeekableStream(inboundStream, virtualStream);
+
+            readOnlySeekableStream.Position = 0;
+            readOnlySeekableStream.Seek(0, SeekOrigin.Begin);
+
+            return readOnlySeekableStream;
         }
     }
 }
