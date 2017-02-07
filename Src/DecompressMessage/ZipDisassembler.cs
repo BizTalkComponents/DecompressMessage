@@ -28,7 +28,7 @@ namespace BizTalkComponents.PipelineComponents.DecompressMessage
 
             if (bodyPart != null)
             {
-                _qOutMessages = _decompressionManager.DecompressAndSpliMessage(pInMsg, pContext);
+                _qOutMessages = _decompressionManager.DecompressAndSplitMessage(pInMsg, pContext);
             }
         }
 
