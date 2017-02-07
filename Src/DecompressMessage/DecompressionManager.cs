@@ -26,7 +26,7 @@ namespace BizTalkComponents.PipelineComponents.DecompressMessage
             _decompressor = decompressor;
         }
 
-        public Queue DecompressAndSpliMessage(IBaseMessage inMsg, IPipelineContext pctx)
+        public Queue DecompressAndSplitMessage(IBaseMessage inMsg, IPipelineContext pctx)
         {
             var readOnlySeekableStream = GetSeekableStream(inMsg);
 
