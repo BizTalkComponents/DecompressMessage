@@ -69,6 +69,12 @@
     <None Include="TestData\test.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="TestData\testMultipart.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\testMultipartThree.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Src\DecompressMessage\BizTalkComponents.PipelineComponents.DecompressMessage.csproj">
