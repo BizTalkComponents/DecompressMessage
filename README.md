@@ -9,7 +9,8 @@ _No parameters_
 Extended behaviour for this component will be added at a later point.
 
 ##UnzipMultipart component
-The UnzipMultipart component extracts the zip file entires to one file for all entries. Sorting by .XML in descending order.
+Intended to be used for handling xml files with attachments such as pdfs or images where we want to keep them together as one message in BizTalk.
+The UnzipMultipart component extracts the zip file entries to one message with a messagepart for each file in the zip file. Body part will default to the first xml file.
 
 _No parameters_
 
